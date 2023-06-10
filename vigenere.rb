@@ -2,16 +2,34 @@
 
 # Creación de la clase principal
 class Vigenere
-  def initialize (message, key)
-    @message = message.split('')
+  def initialize(message, key)
+    @message = message.upcase.split('')
     @key = key.split('')
   end
 
-    # Creación para el diagrama
-  def vigenere_diagram
-    uppercase_alphabetic = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-    puts @message.inspect
+  # Arroja el resultado en número
+  def vigenere_diagram(word)
+    uppercase_alphabetic = %w[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z] # Sin ñ para probar
+    result = Array.new(0)
+
+    word.each do |letter|
+      result.push(uppercase_alphabetic.index(letter)) if uppercase_alphabetic.include?(letter)
+    end
+    result
+  end
+
+  def encryption
+    if @key.length > @message.length
+      puts 'La palabra clave debe ser menor o igual al mensaje'
+      return
+    end
+    
+    a = @message.length % @key.length
+
+    puts a
+
   end
 end
-mi_vegenere = Vigenere.new("hola","Mi Papa")
-mi_vegenere.vigenere_diagram
+
+mi_vegenere = Vigenere.new('Misb2', 'pru')
+mi_vegenere.encryption
